@@ -1,5 +1,7 @@
 export class CityDetails {
-    constructor() {
-        //
+    cityName: string;
+    stateCode: string;
+    
+    constructor(cityName: string, stateCode: string) {
     }
 }
