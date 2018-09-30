@@ -26,15 +26,17 @@ export class WeatherForecastListComponent {
     this.weatherBitUrl = `${weatherBit.urlBase}?city=${this.searchText}&key=${weatherBit.apiKey}`;
 
     this.http.get(this.weatherBitUrl).subscribe(result => {
-      if (result['city_name'] && result['state_code']) {
-        this.cityDetails = new CityDetails(result['city_name'], result['state_code']);
-      }
-      if (result['data']) {
-        this.weatherForecasts = result['data'].map((weatherForecast) => {
-          const forecast = new WeatherForecast();
-          Object.assign(forecast, weatherForecast);
-          return forecast;
-        });
+      if (result) {
+        if (result['city_name'] && result['state_code']) {
+          this.cityDetails = new CityDetails(result['city_name'], result['state_code']);
+        }
+        if (result['data']) {
+          this.weatherForecasts = result['data'].map((weatherForecast) => {
+            const forecast = new WeatherForecast();
+            Object.assign(forecast, weatherForecast);
+            return forecast;
+          });
+        }
       }
     });
   }
