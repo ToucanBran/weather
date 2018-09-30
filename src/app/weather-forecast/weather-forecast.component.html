@@ -1,12 +1,13 @@
 <div class="row border-bottom">
-    <h3 class="col-sm text-center">{{weatherForecast.getDay()}}</h3>
+    <h3 class="col-sm text-secondary text-center">{{weatherForecast.getDay()}}</h3>
 </div>
-<div id="description" class="row border-bottom">
+<div id="description" class="row border-bottom d-flex flex-column">
+    <div class="col-sm text-center">{{weatherForecast.getShortDate()}}</div>
     <div class="col-sm text-center">{{weatherForecast.getDescription()}}</div>
 </div>
 <div class="row">
     <div class="col-sm d-flex flex-column">
-        <h4 class="text-secondary text-center">{{weatherForecast.max_temp}}</h4>
-        <h6 class="text-primary text-center">{{weatherForecast.min_temp}}</h6>
+        <h3 class="text-secondary text-center">{{weatherForecast.getMaxTempF()}}</h3>
+        <h5 class="text-primary text-center">{{weatherForecast.getMinTempF()}}</h5>
     </div>
 </div>

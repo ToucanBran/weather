@@ -2,5 +2,6 @@
   <h3>16-day Forecast: {{cityDetails.cityName}}, {{cityDetails.stateCode}}</h3>
 </div>
 <div class="row">
-  <app-weather-forecast *ngFor="let forecast of weatherForecasts" class="col-md-1 border rounded" [weatherForecast]="forecast"></app-weather-forecast>
+  <app-weather-forecast *ngFor="let forecast of weatherForecasts" 
+  class="col-md-1 mb-1 border rounded" [weatherForecast]="forecast"></app-weather-forecast>
 </div>

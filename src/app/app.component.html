@@ -1,7 +1,27 @@
-<div class="container">
-    <div class="row">
-        <input type="text" [(ngModel)]="searchText" />
-        <button (click)="submit()">Get Weather</button>
-    </div>
+<div [ngClass]="containerClasses()">
+    <ng-container [ngSwitch]="displayInitial">
+        <div *ngSwitchCase="true" class="row d-flex">
+            <div class="col d-flex flex-column">
+                <h1>16-Day Weather Forecast</h1>
+                <div class="input-group mb-3">
+                    <input type="text" (keydown.enter)="submit()" [(ngModel)]="searchText" class="form-control" placeholder="City,State Initials"
+                        aria-label="City,State Initials" aria-describedby="button-addon2">
+                </div>
+                <button type="button" class="btn btn-primary align-self-end" 
+                (click)="submit()">Get Weather</button>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="false" class="row mt-2 d-flex justify-content-center">
+            <div class="input-group mb-3">
+                <input type="text" (keydown.enter)="submit()" [(ngModel)]="searchText" class="form-control" placeholder="City,State Initials"
+                    aria-label="City,State Initials" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2" 
+                    (click)="submit()">Get Weather</button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
     <app-weather-forecast-list class="row seven-cols d-flex" #forecastList [searchText]="searchText"></app-weather-forecast-list>
 </div>

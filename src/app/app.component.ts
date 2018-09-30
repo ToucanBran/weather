@@ -7,11 +7,23 @@ import { Component, ViewChild } from '@angular/core';
 export class AppComponent {
   title = 'app';
   searchText: string;
+  displayInitial = true;
   @ViewChild('forecastList') forecastList;
 
-  constructor() {}
+  constructor() { }
 
   submit() {
+    this.displayInitial = false;
     this.forecastList.getWeather();
   }
+
+  containerClasses() {
+    if (this.displayInitial) {
+      return ['container', 'd-flex', 'justify-content-center', 'align-items-center'];
+    }
+    else {
+      return ['container'];
+    }
+  }
+
 }
