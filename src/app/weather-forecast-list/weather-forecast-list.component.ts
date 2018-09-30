@@ -16,7 +16,7 @@ export class WeatherForecastListComponent {
   weatherBitUrl: string;
   weatherForecasts: WeatherForecast[];
   cityDetails: CityDetails;
-
+  errorMessage: string;
   constructor(private http: HttpClient) {
     this.weatherForecasts = [];
     this.weatherBitUrl = ``;
@@ -26,18 +26,24 @@ export class WeatherForecastListComponent {
     this.weatherBitUrl = `${weatherBit.urlBase}?city=${this.searchText}&key=${weatherBit.apiKey}`;
 
     this.http.get(this.weatherBitUrl).subscribe(result => {
-      if (result) {
-        if (result['city_name'] && result['state_code']) {
-          this.cityDetails = new CityDetails(result['city_name'], result['state_code']);
-        }
-        if (result['data']) {
-          this.weatherForecasts = result['data'].map((weatherForecast) => {
-            const forecast = new WeatherForecast();
-            Object.assign(forecast, weatherForecast);
-            return forecast;
-          });
-        }
+      this.errorMessage = null;
+      if (!result) {
+        this.displayError();
+        return;
       }
-    });
+      this.cityDetails = new CityDetails(result['city_name'], result['state_code']);
+      this.weatherForecasts = result['data'].map((weatherForecast) => {
+        const forecast = new WeatherForecast();
+        Object.assign(forecast, weatherForecast);
+        return forecast;
+      });
+    },
+      err => {
+        this.displayError();
+      });
+  }
+
+  displayError() {
+    this.errorMessage = 'Hmmm... looks like there\'s no data for that city.';
   }
 }

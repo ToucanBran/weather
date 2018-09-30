@@ -1,4 +1,4 @@
-<h1 *ngIf="!cityDetails" class="text-secondary">Hmmm... looks like there's no data for that city.</h1>
+<h1 *ngIf="errorMessage" class="text-secondary">{{errorMessage}}</h1>
 <div *ngIf="cityDetails" class="row">
   <h3>16-day Forecast: {{cityDetails.cityName}}, {{cityDetails.stateCode}}</h3>
 </div>
