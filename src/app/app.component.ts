@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
   searchText: string;
+  @ViewChild('forecastList') forecastList;
 
   constructor() {}
+
+  submit() {
+    this.forecastList.getWeather();
+  }
 }
